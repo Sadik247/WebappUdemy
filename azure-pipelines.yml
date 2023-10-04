@@ -23,7 +23,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(system.defaultworkingdirectory)'
+    PathtoPublish: '$(system.defaultworkingdirectory)/webapp/target/webapp.war'
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
