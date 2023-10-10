@@ -8,6 +8,7 @@ trigger:
 variables:
   # Get the current date in YYYYMMDD format
   currentDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
+
 name: $(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)
 pool:
   vmImage: ubuntu-latest
