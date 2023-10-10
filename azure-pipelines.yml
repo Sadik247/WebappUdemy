@@ -23,8 +23,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- powershell: 
-   $pipelineName = "$(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)"
+
+- powershell: |
+        $pipelineName = "$(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)"
         Write-Host "##vso[task.setvariable variable=pipelineName]$pipelineName"
 
 
