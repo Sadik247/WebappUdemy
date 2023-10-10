@@ -5,7 +5,10 @@
 
 trigger:
 - master
-
+variables:
+  # Get the current date in YYYYMMDD format
+  currentDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
+name: $(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)
 pool:
   vmImage: ubuntu-latest
 
@@ -26,4 +29,10 @@ steps:
     PathtoPublish: '$(system.defaultworkingdirectory)/webapp/target/webapp.war'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+# - task: InvokeRESTAPI@1
+#   inputs:
+#     connectionType: 'connectedServiceNameARM'
+#     azureServiceConnection: 'Pay-As-You-Go (4fb0e611-792d-4836-abce-dcc34575e5c3)'
+#     method: 'POST'
+#     waitForCompletion: 'false'
 
