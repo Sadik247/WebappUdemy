@@ -6,10 +6,11 @@
 trigger:
 - master
 variables:
-  # Get the current date in YYYYMMDD format
+  # Get the current date in YYYYMMDD format using PowerShell
   currentDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
 
-name: $(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)
+name: '$(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)'
+
 pool:
   vmImage: ubuntu-latest
 
