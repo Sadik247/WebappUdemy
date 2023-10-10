@@ -6,12 +6,8 @@
 trigger:
 - master
 variables:
-  # Define the PowerShell script to get the current date in YYYYMMDD format
-  currentDate: $[format('{0:yyyyMMdd}', convertFrom-String -PropertyNames Year,Month,Day -InputObject (Get-Date))]
-
-name: '$(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)'
-
-
+  # Get the current date in YYYYMMDD format
+  currentDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
 
 pool:
   vmImage: ubuntu-latest
@@ -27,16 +23,15 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- powershell: 
+   $pipelineName = "$(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)"
+        Write-Host "##vso[task.setvariable variable=pipelineName]$pipelineName"
+
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(system.defaultworkingdirectory)/webapp/target/webapp.war'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-# - task: InvokeRESTAPI@1
-#   inputs:
-#     connectionType: 'connectedServiceNameARM'
-#     azureServiceConnection: 'Pay-As-You-Go (4fb0e611-792d-4836-abce-dcc34575e5c3)'
-#     method: 'POST'
-#     waitForCompletion: 'false'
+
 
