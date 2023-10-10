@@ -6,10 +6,9 @@
 trigger:
 - master
 variables:
-  # Define the PowerShell script to get the current date in YYYYMMDD format
-  currentDate: $[format('{0:yyyyMMdd}', convertFrom-String -PropertyNames Year,Month,Day -InputObject (Get-Date))]
-
-name: '$(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)'
+  # Get the current date in YYYYMMDD format
+  currentDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
+name: $(Build.DefinitionName)_$(Build.BuildId)_$(variables.currentDate)_$(Build.SourceBranchName)
 
 
 pool:
