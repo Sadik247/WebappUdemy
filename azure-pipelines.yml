@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
+-
 
 name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:r)
 pool:
@@ -28,5 +28,15 @@ steps:
     PathtoPublish: '$(system.defaultworkingdirectory)/webapp/target/webapp.war'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+# parameters:
+#   - name: Environment
+#     displayName: Environment
+#     type: string
+#     default: Dev
+#     values:
+#       - Dev
+#       - Prod
+#       - QA
+
 
 
